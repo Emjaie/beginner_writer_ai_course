@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI for Authors & Storytellers — Speak, Research, Write & Publish</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:#FAF7F2; --warm-white:#FFFDF9; --forest:#2D5016; --forest-light:#4A7C28;
+  --forest-pale:#EBF2E0; --terracotta:#C4622D; --terracotta-pale:#FAF0E9;
+  --gold:#C8922A; --gold-pale:#FDF6E3; --ink:#1A1208; --ink-muted:#5C4A2A;
+  --border:rgba(45,80,22,0.15); --shadow:0 2px 20px rgba(45,80,22,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Source Serif 4',Georgia,serif;background:var(--cream);color:var(--ink);font-size:17px;line-height:1.8;}
+
+/* ═══ NAV ═══ */
+nav{background:var(--forest);color:white;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;height:56px;box-shadow:0 2px 12px rgba(0,0,0,.2);}
+.nav-brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:white;cursor:pointer;}
+.nav-brand span{color:#B8D98A;}
+.nav-links{display:flex;gap:.2rem;align-items:center;}
+.nav-links button{background:none;border:none;color:rgba(255,255,255,.8);font-size:.8rem;font-family:'Source Serif 4',serif;padding:.4rem .7rem;border-radius:6px;cursor:pointer;transition:all .2s;}
+.nav-links button:hover{background:rgba(255,255,255,.12);color:white;}
+.nav-tutor{background:var(--terracotta)!important;color:white!important;font-weight:600!important;}
+.nav-tutor:hover{background:#B5562A!important;}
+.hamburger{display:none;background:none;border:none;color:white;font-size:1.4rem;cursor:pointer;}
+
+/* ═══ PAGES ═══ */
+.page{display:none;min-height:calc(100vh - 56px);}
+.page.active{display:block;}
+
+/* ═══ HERO ═══ */
+.hero{background:linear-gradient(135deg,var(--forest) 0%,#3A6B1E 60%,#4A7C28 100%);color:white;text-align:center;padding:5rem 1.5rem 4rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:50px;padding:.3rem 1.2rem;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.15;margin-bottom:1rem;max-width:780px;margin-left:auto;margin-right:auto;}
+.hero h1 em{color:#B8D98A;font-style:italic;}
+.hero-sub{font-size:1.05rem;opacity:.9;max-width:580px;margin:0 auto 2.5rem;line-height:1.6;}
+.hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-hero-primary{background:var(--terracotta);color:white;padding:.85rem 1.8rem;border-radius:8px;border:none;font-weight:600;font-size:.95rem;font-family:'Source Serif 4',serif;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(196,98,45,.35);}
+.btn-hero-primary:hover{background:#B5562A;transform:translateY(-1px);}
+.btn-hero-secondary{background:rgba(255,255,255,.12);color:white;border:1.5px solid rgba(255,255,255,.35);padding:.85rem 1.8rem;border-radius:8px;font-size:.95rem;font-family:'Source Serif 4',serif;cursor:pointer;transition:all .2s;}
+.btn-hero-secondary:hover{background:rgba(255,255,255,.2);}
+.hero-stats{display:flex;justify-content:center;gap:2.5rem;margin-top:3.5rem;flex-wrap:wrap;}
+.hero-stat strong{display:block;font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#B8D98A;}
+.hero-stat span{font-size:.82rem;opacity:.75;}
+
+/* ═══ SECTIONS ═══ */
+.section{padding:4rem 1.5rem;}
+.section-alt{background:var(--warm-white);}
+.section-dark{background:var(--forest);color:white;}
+.container{max-width:980px;margin:0 auto;}
+.section-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--forest-light);font-weight:600;margin-bottom:.4rem;}
+.section-dark .section-label{color:#B8D98A;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:.8rem;}
+.section-dark .section-title{color:white;}
+.section-intro{font-size:1rem;color:var(--ink-muted);max-width:600px;margin-bottom:2.5rem;line-height:1.7;}
+.section-dark .section-intro{color:rgba(255,255,255,.75);}
+
+/* ═══ STORY CARD ═══ */
+.story-card{display:grid;grid-template-columns:140px 1fr;gap:2rem;align-items:start;background:white;border:1px solid var(--border);border-radius:16px;padding:2rem;box-shadow:var(--shadow);}
+.john-avatar{width:140px;height:140px;background:linear-gradient(135deg,var(--forest-pale),#D1E8BA);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:4rem;flex-shrink:0;}
+.story-quote{border-left:3px solid var(--terracotta);padding-left:1rem;font-style:italic;color:var(--ink-muted);margin:.75rem 0;font-size:.95rem;}
+.journey-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.75rem;}
+.journey-tag{background:var(--forest-pale);color:var(--forest);padding:.25rem .7rem;border-radius:50px;font-size:.75rem;font-weight:600;}
+
+/* ═══ TOOLS GRID ═══ */
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;}
+.tool-card{background:white;border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:all .25s;cursor:pointer;box-shadow:0 1px 8px rgba(45,80,22,.06);}
+.tool-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(45,80,22,.12);border-color:var(--forest-light);}
+.tool-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:.85rem;}
+.tool-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:.2rem;}
+.tool-role{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:.5rem;}
+.tool-desc{font-size:.85rem;color:var(--ink-muted);line-height:1.6;}
+
+/* ═══ MODULES LIST ═══ */
+.modules-list{display:flex;flex-direction:column;gap:.75rem;}
+.module-item{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:1.2rem 1.5rem;display:grid;grid-template-columns:44px 1fr auto;gap:1rem;align-items:center;cursor:pointer;transition:all .2s;color:white;}
+.module-item:hover{background:rgba(255,255,255,.12);border-color:rgba(184,217,138,.4);}
+.module-num{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:#B8D98A;text-align:center;}
+.module-item-title{font-weight:600;font-size:.95rem;margin-bottom:.15rem;}
+.module-item-desc{font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.4;}
+.module-tag{background:rgba(184,217,138,.15);color:#B8D98A;border:1px solid rgba(184,217,138,.3);padding:.15rem .6rem;border-radius:50px;font-size:.7rem;white-space:nowrap;}
+
+/* ═══ MODULE CONTENT PAGES ═══ */
+.mod-hero{background:linear-gradient(135deg,#1A3A0A 0%,var(--forest) 60%);color:white;padding:3rem 1.5rem 2.5rem;}
+.mod-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:#B8D98A;font-weight:600;margin-bottom:.5rem;}
+.mod-hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.5rem);font-weight:700;line-height:1.15;margin-bottom:.7rem;}
+.mod-hero h1 em{color:#B8D98A;font-style:italic;}
+.mod-hero p{opacity:.85;font-size:1rem;max-width:580px;}
+.mod-nav-pills{display:flex;gap:.4rem;margin-top:1.5rem;flex-wrap:wrap;}
+.mod-nav-pills button{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-size:.75rem;font-family:'Source Serif 4',serif;padding:.35rem .8rem;border-radius:6px;cursor:pointer;transition:all .2s;}
+.mod-nav-pills button:hover{background:rgba(255,255,255,.18);color:white;}
+.mod-nav-pills button.active-pill{background:rgba(184,217,138,.2);border-color:rgba(184,217,138,.5);color:#B8D98A;}
+
+.mod-body{padding:2.5rem 1.5rem;max-width:760px;margin:0 auto;}
+.mod-body>*+*{margin-top:1.6rem;}
+.mod-h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--ink);margin-top:2.2rem;}
+.mod-h3{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:600;color:var(--forest);margin-top:1.2rem;}
+.mod-p{color:var(--ink-muted);font-size:.97rem;}
+
+.intro-card{background:var(--forest-pale);border-left:4px solid var(--forest);border-radius:0 10px 10px 0;padding:1.2rem 1.5rem;}
+.intro-card p{color:var(--forest);font-size:.97rem;}
+
+.john-box{background:white;border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;display:flex;gap:.9rem;align-items:flex-start;box-shadow:var(--shadow);}
+.john-box-icon{font-size:2.2rem;flex-shrink:0;}
+.john-box-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--forest-light);margin-bottom:.25rem;}
+.john-box p{font-size:.9rem;color:var(--ink-muted);}
+
+.prompt-card{background:white;border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.5rem;box-shadow:var(--shadow);}
+.prompt-card+.prompt-card{margin-top:1rem;}
+.prompt-card .mod-h3{margin-top:0;}
+.prompt-box{background:var(--forest-pale);border:1px solid rgba(45,80,22,.2);border-radius:9px;padding:.9rem 1.1rem;margin:.65rem 0;}
+.prompt-lbl{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--forest-light);margin-bottom:.3rem;}
+.prompt-txt{font-size:.88rem;color:var(--forest);font-style:italic;line-height:1.65;}
+.copy-btn{background:var(--forest);color:white;border:none;border-radius:6px;padding:.3rem .8rem;font-size:.75rem;font-family:'Source Serif 4',serif;cursor:pointer;margin-top:.4rem;transition:background .2s;}
+.copy-btn:hover{background:var(--forest-light);}
+.copy-btn.copied{background:#27AE60;}
+
+.exercise-box{background:white;border:2px solid var(--terracotta);border-radius:12px;padding:1.4rem 1.6rem;}
+.exercise-lbl{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--terracotta);margin-bottom:.4rem;}
+.exercise-box .mod-h3{color:var(--ink);margin-top:0;}
+.exercise-box p{font-size:.9rem;color:var(--ink-muted);}
+
+.tool-table{width:100%;border-collapse:collapse;margin:.75rem 0;font-size:.9rem;}
+.tool-table th{background:var(--forest);color:white;text-align:left;padding:.6rem .9rem;font-size:.8rem;font-weight:600;letter-spacing:.04em;}
+.tool-table td{padding:.6rem .9rem;border-bottom:1px solid var(--border);background:white;vertical-align:top;}
+.tool-table tr:last-child td{border-bottom:none;}
+.tool-table tr:hover td{background:var(--forest-pale);}
+.tool-table td:first-child{text-align:center;font-size:1.2rem;width:50px;}
+.tool-table td:nth-child(2){font-weight:600;color:var(--ink);}
+.tool-table td:nth-child(3){color:var(--terracotta);font-weight:600;}
+.tool-table td:nth-child(4){color:var(--ink-muted);}
+
+.myth-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+.myth-card{background:white;border-radius:10px;padding:1.1rem;border:1px solid var(--border);}
+.myth-card.red{border-top:3px solid #E24B4A;}
+.myth-card.green{border-top:3px solid var(--forest-light);}
+.myth-lbl{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.35rem;}
+.myth-card.red .myth-lbl{color:#A32D2D;}
+.myth-card.green .myth-lbl{color:var(--forest);}
+.myth-card p{font-size:.87rem;color:var(--ink-muted);line-height:1.55;}
+
+.workflow-flow{display:flex;align-items:center;flex-wrap:wrap;gap:.4rem;margin:.9rem 0;}
+.flow-step{background:var(--forest-pale);border:1px solid rgba(45,80,22,.2);border-radius:7px;padding:.4rem .85rem;font-size:.82rem;color:var(--forest);font-weight:600;}
+.flow-arrow{color:var(--ink-muted);}
+
+.step-list{list-style:none;padding:0;margin:.6rem 0;}
+.step-list li{display:flex;gap:.65rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid var(--border);}
+.step-list li:last-child{border-bottom:none;}
+.step-num{width:26px;height:26px;background:var(--forest);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0;margin-top:.15rem;}
+.step-list p{font-size:.88rem;color:var(--ink-muted);margin:0;}
+
+.completion-banner{background:var(--forest);color:white;border-radius:14px;padding:2.2rem;text-align:center;}
+.completion-banner h2{font-family:'Playfair Display',serif;color:white;font-size:1.7rem;margin-bottom:.6rem;}
+.completion-banner p{color:rgba(255,255,255,.8);max-width:450px;margin:0 auto 1.4rem;}
+
+.mod-footer{display:flex;justify-content:space-between;align-items:center;margin-top:2.5rem;padding-top:1.8rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:.75rem;}
+.btn-mod{padding:.6rem 1.5rem;border-radius:8px;font-weight:600;font-size:.9rem;font-family:'Source Serif 4',serif;cursor:pointer;transition:all .2s;border:none;}
+.btn-forest{background:var(--forest);color:white;}
+.btn-forest:hover{background:var(--forest-light);}
+.btn-terra{background:var(--terracotta);color:white;}
+.btn-terra:hover{background:#B5562A;}
+.btn-outline{background:transparent;color:var(--forest);border:1.5px solid var(--forest)!important;border:none;}
+.btn-outline:hover{background:var(--forest);color:white;}
+
+/* ═══ TUTOR PAGE ═══ */
+.tutor-layout{display:flex;height:calc(100vh - 56px);}
+.tutor-sidebar{width:260px;background:white;border-right:1px solid var(--border);padding:1.3rem;overflow-y:auto;flex-shrink:0;}
+.ts-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:.25rem;}
+.ts-sub{font-size:.78rem;color:var(--ink-muted);margin-bottom:1.2rem;line-height:1.5;}
+.ts-section-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--forest-light);font-weight:600;margin-bottom:.5rem;}
+.ts-section{margin-bottom:1.3rem;}
+.quick-q{display:block;width:100%;text-align:left;background:var(--cream);border:1px solid var(--border);border-radius:7px;padding:.5rem .8rem;font-size:.8rem;font-family:'Source Serif 4',serif;color:var(--ink);cursor:pointer;margin-bottom:.35rem;transition:all .2s;line-height:1.4;}
+.quick-q:hover{background:var(--forest-pale);border-color:var(--forest-light);color:var(--forest);}
+.task-card-s{background:var(--terracotta-pale);border:1px solid rgba(196,98,45,.2);border-radius:9px;padding:.9rem;margin-bottom:.5rem;}
+.task-card-s .lbl{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--terracotta);margin-bottom:.25rem;}
+.task-card-s .ttl{font-size:.85rem;font-weight:600;margin-bottom:.2rem;}
+.task-card-s .dsc{font-size:.78rem;color:var(--ink-muted);line-height:1.5;}
+.task-card-s button{margin-top:.5rem;background:var(--terracotta);color:white;border:none;border-radius:5px;padding:.3rem .8rem;font-size:.78rem;font-family:'Source Serif 4',serif;cursor:pointer;width:100%;transition:background .2s;}
+.task-card-s button:hover{background:#B5562A;}
+
+.chat-area{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#F5F2EC;}
+.chat-header{background:white;border-bottom:1px solid var(--border);padding:.9rem 1.3rem;display:flex;align-items:center;gap:.7rem;flex-shrink:0;}
+.t-avatar{width:40px;height:40px;background:linear-gradient(135deg,var(--forest),var(--forest-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.t-name{font-weight:600;font-size:.9rem;}
+.t-status{font-size:.72rem;color:var(--forest-light);display:flex;align-items:center;gap:.3rem;}
+.sdot{width:6px;height:6px;background:var(--forest-light);border-radius:50%;}
+.source-pills{display:flex;gap:.35rem;margin-left:auto;}
+.spill{font-size:.67rem;padding:.18rem .55rem;border-radius:50px;font-weight:500;}
+.spill-c{background:var(--forest-pale);color:var(--forest);}
+.spill-w{background:#E8F0FE;color:#1967D2;}
+
+.messages{flex:1;overflow-y:auto;padding:1.3rem;display:flex;flex-direction:column;gap:1rem;}
+.msg{display:flex;gap:.65rem;max-width:88%;animation:fadeUp .3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.msg.user{align-self:flex-end;flex-direction:row-reverse;}
+.m-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+.tutor-msg .m-av{background:linear-gradient(135deg,var(--forest),var(--forest-light));}
+.user-msg .m-av{background:var(--terracotta);}
+.m-bubble{padding:.8rem 1rem;border-radius:12px;font-size:.88rem;line-height:1.65;}
+.tutor-msg .m-bubble{background:white;border:1px solid var(--border);border-top-left-radius:3px;color:var(--ink);}
+.user-msg .m-bubble{background:var(--forest);color:white;border-top-right-radius:3px;}
+.m-bubble p{margin-bottom:.4rem;}
+.m-bubble p:last-child{margin-bottom:0;}
+.m-bubble strong{color:var(--forest);}
+.user-msg .m-bubble strong{color:#B8D98A;}
+.prompt-chip{background:var(--forest-pale);border:1px solid rgba(45,80,22,.2);border-radius:7px;padding:.6rem .9rem;margin:.4rem 0;font-size:.83rem;}
+.prompt-chip .lbl{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--forest-light);margin-bottom:.25rem;}
+.prompt-chip .txt{color:var(--forest);font-style:italic;line-height:1.5;}
+.typing{display:flex;align-items:center;gap:4px;padding:.8rem 1rem;}
+.typing span{width:6px;height:6px;background:var(--ink-muted);border-radius:50%;animation:bounce 1.2s ease infinite;}
+.typing span:nth-child(2){animation-delay:.2s;}
+.typing span:nth-child(3){animation-delay:.4s;}
+@keyframes bounce{0%,80%,100%{transform:scale(0.7);opacity:.4}40%{transform:scale(1);opacity:1}}
+
+.chat-input-area{background:white;border-top:1px solid var(--border);padding:.9rem 1.3rem;flex-shrink:0;}
+.input-row{display:flex;gap:.65rem;align-items:flex-end;}
+.chat-input{flex:1;border:1.5px solid var(--border);border-radius:9px;padding:.65rem .9rem;font-size:.9rem;font-family:'Source Serif 4',serif;resize:none;min-height:46px;max-height:130px;color:var(--ink);background:var(--cream);transition:border .2s;outline:none;line-height:1.5;}
+.chat-input:focus{border-color:var(--forest-light);background:white;}
+.send-btn{width:44px;height:44px;background:var(--forest);border:none;border-radius:9px;color:white;font-size:1rem;cursor:pointer;flex-shrink:0;transition:all .2s;display:flex;align-items:center;justify-content:center;}
+.send-btn:hover{background:var(--forest-light);transform:scale(1.04);}
+.send-btn:disabled{background:#ccc;cursor:not-allowed;transform:none;}
+.input-hint{font-size:.7rem;color:var(--ink-muted);margin-top:.4rem;}
+
+/* ═══ TUTOR CTA SECTION ═══ */
+.tutor-cta-section{background:var(--terracotta-pale);}
+.tutor-cta-card{background:white;border-radius:14px;padding:2.5rem;text-align:center;border:1px solid rgba(196,98,45,.2);box-shadow:0 4px 24px rgba(196,98,45,.1);}
+.tutor-cta-card h2{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--ink);margin-bottom:.7rem;}
+.tutor-cta-card p{color:var(--ink-muted);max-width:500px;margin:0 auto 1.8rem;}
+.tutor-feats{display:flex;justify-content:center;gap:1.8rem;flex-wrap:wrap;margin-bottom:1.8rem;}
+.tutor-feat .icon{font-size:1.4rem;margin-bottom:.25rem;}
+.tutor-feat span{font-size:.8rem;color:var(--ink-muted);display:block;}
+
+footer{background:var(--ink);color:rgba(255,255,255,.6);text-align:center;padding:1.8rem;font-size:.82rem;}
+footer button{background:none;border:none;color:#B8D98A;font-family:'Source Serif 4',serif;font-size:.82rem;cursor:pointer;text-decoration:underline;}
+
+@media(max-width:700px){
+  .story-card{grid-template-columns:1fr;}
+  .john-avatar{width:90px;height:90px;font-size:2.8rem;}
+  .myth-grid{grid-template-columns:1fr;}
+  .tutor-sidebar{display:none;}
+  .module-item{grid-template-columns:38px 1fr;}
+  .module-tag{display:none;}
+  .nav-links .hide-mob{display:none;}
+  .hamburger{display:block;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav>
+  <div class="nav-brand" onclick="showPage('home')">AI for <span>Authors</span></div>
+  <div class="nav-links">
+    <button class="hide-mob" onclick="showPage('home')">🏠 Home</button>
+    <button class="hide-mob" onclick="showPage('tools')">🛠️ Tools</button>
+    <button class="hide-mob" onclick="showPage('modules')">📚 Modules</button>
+    <button class="nav-tutor" onclick="showPage('tutor')">🤖 AI Tutor</button>
+  </div>
+</nav>
+
+<!-- ═══════════════ HOME PAGE ═══════════════ -->
+<div class="page active" id="page-home">
+
+  <div class="hero">
+    <div class="hero-badge">✦ Free Online Course ✦</div>
+    <h1>Speak, Research, Write &amp; <em>Publish</em> with AI</h1>
+    <p class="hero-sub">A warm, practical course for authors and storytellers who want to use AI as a writing team — no technical experience required.</p>
+    <div class="hero-buttons">
+      <button class="btn-hero-primary" onclick="showPage('mod1')">📖 Start the Course</button>
+      <button class="btn-hero-secondary" onclick="showPage('tutor')">🤖 Talk to Your AI Tutor</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>8</strong><span>Modules</span></div>
+      <div class="hero-stat"><strong>6</strong><span>AI Tools</span></div>
+      <div class="hero-stat"><strong>4+</strong><span>Projects</span></div>
+      <div class="hero-stat"><strong>60+</strong><span>Made for you</span></div>
+    </div>
+  </div>
+
+  <!-- John's Story -->
+  <div class="section section-alt">
+    <div class="container">
+      <div class="section-label">Your guide through the course</div>
+      <div class="section-title">Follow John's Journey</div>
+      <p class="section-intro">Throughout this course, we follow John — a 67-year-old retired teacher who has always dreamed of writing a book about his life.</p>
+      <div class="story-card">
+        <div class="john-avatar">👨🏾‍🏫</div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:.25rem;">Meet John Kamau, 67</div>
+          <div style="font-size:.8rem;color:var(--ink-muted);margin-bottom:.75rem;">Retired teacher, Nairobi · Dreams of writing a memoir</div>
+          <div class="story-quote">"I have so many stories from 40 years of teaching. But every time I sit down to write, I don't know where to start. I type slowly. My eyes get tired. And I wonder — is it too late for me to write a book?"</div>
+          <p style="font-size:.9rem;color:var(--ink-muted);margin-bottom:.75rem;">By the end of this course, John has a full memoir, a family history booklet, a book cover, and a launch presentation — <strong>all created with AI.</strong></p>
+          <div class="journey-tags">
+            <span class="journey-tag">🎙️ Speaks memories</span>
+            <span class="journey-tag">🔍 Researches facts</span>
+            <span class="journey-tag">✍️ Drafts chapters</span>
+            <span class="journey-tag">✏️ Edits beautifully</span>
+            <span class="journey-tag">📚 Publishes his book</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tools -->
+  <div class="section" id="page-tools-section">
+    <div class="container">
+      <div class="section-label">Your AI Team</div>
+      <div class="section-title">Six Powerful Assistants, Working for You</div>
+      <p class="section-intro">Think of these AI tools as your personal team of apprentices — each one expert at a different job. Click any card to learn more.</p>
+      <div class="tools-grid">
+        <div class="tool-card" onclick="showPage('mod3')">
+          <div class="tool-icon" style="background:#FEF3E2;">🤖</div>
+          <div class="tool-name">ChatGPT</div>
+          <div class="tool-role" style="color:#C8922A;">Your Writing Companion</div>
+          <div class="tool-desc">Brainstorm, outline, draft chapters, and get interviewed about your life. Always available, never tired.</div>
+        </div>
+        <div class="tool-card" onclick="showPage('mod4')">
+          <div class="tool-icon" style="background:#EBF2E0;">✨</div>
+          <div class="tool-name">Claude</div>
+          <div class="tool-role" style="color:#4A7C28;">Your Thoughtful Editor</div>
+          <div class="tool-desc">Handles long manuscripts with care. Preserves your voice while polishing your writing professionally.</div>
+        </div>
+        <div class="tool-card" onclick="showPage('mod5')">
+          <div class="tool-icon" style="background:#F0F4FF;">🔍</div>
+          <div class="tool-name">Perplexity AI</div>
+          <div class="tool-role" style="color:#3A5DC8;">Your Fact-Checker</div>
+          <div class="tool-desc">Research dates, historical events, and references — with real sources you can verify yourself.</div>
+        </div>
+        <div class="tool-card" onclick="showPage('mod6')">
+          <div class="tool-icon" style="background:#FAF0E9;">🎨</div>
+          <div class="tool-name">Napkin AI</div>
+          <div class="tool-role" style="color:#C4622D;">Your Graphic Designer</div>
+          <div class="tool-desc">Turn text into timelines, family trees, and chapter maps. No design skills needed at all.</div>
+        </div>
+        <div class="tool-card" onclick="showPage('mod2')">
+          <div class="tool-icon" style="background:#F5F0FF;">🎙️</div>
+          <div class="tool-name">Voice Tools</div>
+          <div class="tool-role" style="color:#6B3FBC;">Your Transcription Team</div>
+          <div class="tool-desc">Speak your stories out loud and watch them become written chapters. Perfect if typing is slow or difficult.</div>
+        </div>
+        <div class="tool-card" onclick="showPage('mod7')">
+          <div class="tool-icon" style="background:#E3F6F5;">🖼️</div>
+          <div class="tool-name">Canva AI</div>
+          <div class="tool-role" style="color:#0D7A74;">Your Book Designer</div>
+          <div class="tool-desc">Create stunning book covers, illustrations, and social media graphics — all with AI assistance.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modules -->
+  <div class="section section-dark">
+    <div class="container">
+      <div class="section-label">The Full Course</div>
+      <div class="section-title">8 Modules — From Idea to Published Book</div>
+      <p class="section-intro">Each module builds on the last, and John guides you through every step. Click any module to begin.</p>
+      <div class="modules-list">
+        <div class="module-item" onclick="showPage('mod1')"><div class="module-num">1</div><div><div class="module-item-title">What AI Actually Is — And How It Can Help You</div><div class="module-item-desc">Bust the myths. Understand AI as a team of helpful apprentices, not robots.</div></div><div class="module-tag">Start here</div></div>
+        <div class="module-item" onclick="showPage('mod2')"><div class="module-num">2</div><div><div class="module-item-title">Speak Your Book Into Existence</div><div class="module-item-desc">Whisper, ChatGPT Voice, Otter.ai — turn spoken stories into written chapters.</div></div><div class="module-tag">🎙️ Voice</div></div>
+        <div class="module-item" onclick="showPage('mod3')"><div class="module-num">3</div><div><div class="module-item-title">ChatGPT — Your Writing Companion</div><div class="module-item-desc">Brainstorm, outline, draft memoirs, and get interviewed by AI.</div></div><div class="module-tag">💬 Drafting</div></div>
+        <div class="module-item" onclick="showPage('mod4')"><div class="module-num">4</div><div><div class="module-item-title">Claude — The Thoughtful Editor</div><div class="module-item-desc">Upload full chapters and get nuanced editing that respects your unique voice.</div></div><div class="module-tag">✏️ Editing</div></div>
+        <div class="module-item" onclick="showPage('mod5')"><div class="module-num">5</div><div><div class="module-item-title">Perplexity AI — Your Fact Checker</div><div class="module-item-desc">Research historical events and dates with verified, citable sources.</div></div><div class="module-tag">🔍 Research</div></div>
+        <div class="module-item" onclick="showPage('mod6')"><div class="module-num">6</div><div><div class="module-item-title">Napkin AI — Turn Ideas into Visuals</div><div class="module-item-desc">Create family trees, life timelines, and chapter diagrams instantly.</div></div><div class="module-tag">🎨 Visuals</div></div>
+        <div class="module-item" onclick="showPage('mod7')"><div class="module-num">7</div><div><div class="module-item-title">AI Images — Book Covers & Illustrations</div><div class="module-item-desc">Generate cover art and illustrations that bring your story to life.</div></div><div class="module-tag">🖼️ Design</div></div>
+        <div class="module-item" onclick="showPage('mod8')"><div class="module-num">8</div><div><div class="module-item-title">Your Complete Author Workflow</div><div class="module-item-desc">Voice → Draft → Edit → Design → Publish. Your personal AI publishing team.</div></div><div class="module-tag">🚀 Publish</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tutor CTA -->
+  <div class="section tutor-cta-section">
+    <div class="container">
+      <div class="tutor-cta-card">
+        <div style="font-size:3rem;margin-bottom:.75rem;">🤖</div>
+        <h2>Meet Your AI Course Tutor</h2>
+        <p>Stuck on a lesson? Have a question? Want feedback on your writing? Amara is available 24/7 — powered by Claude and web search.</p>
+        <div class="tutor-feats">
+          <div class="tutor-feat"><div class="icon">💬</div><span>Ask any question</span></div>
+          <div class="tutor-feat"><div class="icon">✅</div><span>Get homework feedback</span></div>
+          <div class="tutor-feat"><div class="icon">🌐</div><span>Searches the web</span></div>
+          <div class="tutor-feat"><div class="icon">📝</div><span>Practise with you</span></div>
+        </div>
+        <button class="btn-hero-primary" onclick="showPage('tutor')">Open Your AI Tutor →</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>AI for Authors & Storytellers · A free course for the 60+ generation ·
+      <button onclick="showPage('tutor')">AI Tutor</button> ·
+      <button onclick="showPage('mod1')">Begin the Course</button>
+    </p>
+  </footer>
+</div>
+
+<!-- ═══════════════ MODULE 1 ═══════════════ -->
+<div class="page" id="page-mod1">
+  <div class="mod-hero">
+    <div class="container">
+      <div class="mod-label">Module 1 of 8 · Introduction</div>
+      <h1>What AI Actually Is — <em>And How It Can Help You</em></h1>
+      <p>Let us clear away the myths. AI is not magic, not a robot, and not complicated. It is a team of powerful assistants, waiting to help you tell your story.</p>
+      <div class="mod-nav-pills" id="pills1"></div>
+    </div>
+  </div>
+  <div class="mod-body">
+    <div class="intro-card"><p><strong>Most people imagine AI as something from a science fiction film.</strong> This module exists to replace that picture with a much more useful one — and to give you the confidence to start.</p></div>
+
+    <div class="john-box">
+      <div class="john-box-icon">👨🏾‍🏫</div>
+      <div><div class="john-box-label">John's Story — Where We Begin</div><p>When John first heard about AI, he pictured a robot. He was nervous. "What if it writes better than me?" By the end of this module, John understood: <strong>AI does not replace him. It works for him.</strong></p></div>
+    </div>
+
+    <div class="mod-h2">The Honest Truth About AI</div>
+    <p class="mod-p">Artificial intelligence is software trained on enormous amounts of text — billions of books, articles, and websites. When you ask it a question or give it a task, it draws on all that reading to help you. That is all it is. <strong>A very well-read assistant.</strong> It cannot think for itself. It cannot feel. And it very much needs your ideas, your memories, and your voice.</p>
+
+    <div class="myth-grid">
+      <div class="myth-card red"><div class="myth-lbl">❌ The Myth</div><p><strong>"AI will write my book for me."</strong><br>AI produces average-sounding text without your real stories. Only you can provide your memories and emotions.</p></div>
+      <div class="myth-card green"><div class="myth-lbl">✅ The Reality</div><p><strong>AI helps you write your book.</strong><br>It organises your ideas, improves your sentences, and suggests structure — but the heart is always yours.</p></div>
+      <div class="myth-card red"><div class="myth-lbl">❌ The Myth</div><p><strong>"You need to be technical to use AI."</strong><br>This fear keeps people away from tools that could genuinely transform their writing life.</p></div>
+      <div class="myth-card green"><div class="myth-lbl">✅ The Reality</div><p><strong>You just need to type — or speak.</strong><br>These tools work like a conversation. You write naturally and the AI responds helpfully.</p></div>
+    </div>
+
+    <div class="mod-h2">Your AI Writing Team</div>
+    <p class="mod-p">Imagine you could hire five skilled assistants for free:</p>
+    <table class="tool-table">
+      <thead><tr><th></th><th>AI Tool</th><th>Their Job</th><th>What They Do</th></tr></thead>
+      <tbody>
+        <tr><td>🤖</td><td>ChatGPT</td><td>Writing Partner</td><td>Brainstorm, outline, draft chapters, interview you about your memories</td></tr>
+        <tr><td>✨</td><td>Claude</td><td>Your Editor</td><td>Read your full manuscript and improve it while keeping your voice</td></tr>
+        <tr><td>🔍</td><td>Perplexity AI</td><td>Your Researcher</td><td>Find facts, dates, historical details — with sources you can check</td></tr>
+        <tr><td>🎨</td><td>Napkin AI</td><td>Graphic Designer</td><td>Turn your ideas into timelines, diagrams, and visual maps</td></tr>
+        <tr><td>🖼️</td><td>Canva AI</td><td>Book Designer</td><td>Create your book cover, chapter illustrations, and social graphics</td></tr>
+      </tbody>
+    </table>
+
+    <div class="mod-h2">The Key Skill: Giving Good Instructions</div>
+    <p class="mod-p">The instructions you give AI are called <strong>prompts</strong>. Three habits make a big difference:</p>
+
+    <div class="prompt-card">
+      <div class="mod-h3">💡 Be specific about who you are</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Example prompt</div><div class="prompt-txt">"I am a 67-year-old retired teacher from Nairobi writing a memoir about my years in the classroom."</div><button class="copy-btn" onclick="copyPrompt(this,'I am a 67-year-old retired teacher from Nairobi writing a memoir about my years in the classroom.')">Copy</button></div>
+    </div>
+    <div class="prompt-card">
+      <div class="mod-h3">💡 Tell it exactly what you want</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Example prompt</div><div class="prompt-txt">"Give me 10 chapter title ideas for a memoir about resilience and family in rural Kenya during the 1970s."</div><button class="copy-btn" onclick="copyPrompt(this,'Give me 10 chapter title ideas for a memoir about resilience and family in rural Kenya during the 1970s.')">Copy</button></div>
+    </div>
+    <div class="prompt-card">
+      <div class="mod-h3">💡 Ask it to match your tone</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Example prompt</div><div class="prompt-txt">"Rewrite this paragraph to sound warm and conversational — like I am speaking to a dear friend."</div><button class="copy-btn" onclick="copyPrompt(this,'Rewrite this paragraph to sound warm and conversational — like I am speaking to a dear friend.')">Copy</button></div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-lbl">📝 Exercise 1 — The Apprentice Question</div>
+      <div class="mod-h3">If you had five free assistants, what would you ask them?</div>
+      <p>Write down five things you wish you had help with in your writing. For example: <em>"I wish someone could help me remember the right order of events."</em> Then bring your list to your AI Tutor — Amara will tell you which tool can help and give you the exact prompt to use.</p>
+    </div>
+
+    <div class="mod-footer">
+      <button class="btn-mod btn-outline" onclick="showPage('home')">← Back to Home</button>
+      <button class="btn-mod btn-terra" onclick="showPage('mod2')">Next: Speak Your Book 🎙️</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ MODULE 2 ═══════════════ -->
+<div class="page" id="page-mod2">
+  <div class="mod-hero">
+    <div class="container">
+      <div class="mod-label">Module 2 of 8 · Voice Tools</div>
+      <h1>Speak Your Book <em>Into Existence</em></h1>
+      <p>The most powerful writing tool for many authors over 60 is not the keyboard. It is your voice. Speak your stories and watch them become written chapters.</p>
+      <div class="mod-nav-pills" id="pills2"></div>
+    </div>
+  </div>
+  <div class="mod-body">
+    <div class="intro-card"><p><strong>You do not need to type well to write a book.</strong> Winston Churchill dictated his books. Agatha Christie used a voice recorder. Today, AI makes this faster and more accessible than ever.</p></div>
+
+    <div class="john-box">
+      <div class="john-box-icon">👨🏾‍🏫</div>
+      <div><div class="john-box-label">John's Moment</div><p>John's fingers ached after ten minutes of typing. Then he discovered he could press a button, speak for twenty minutes, and watch it become a full chapter draft. <strong>"It felt like magic," he said. "But it was just a tool."</strong></p></div>
+    </div>
+
+    <div class="mod-h2">The Voice Workflow</div>
+    <div class="workflow-flow">
+      <span class="flow-step">🎙️ You Speak</span><span class="flow-arrow">→</span>
+      <span class="flow-step">📝 Whisper Transcribes</span><span class="flow-arrow">→</span>
+      <span class="flow-step">🤖 ChatGPT Drafts</span><span class="flow-arrow">→</span>
+      <span class="flow-step">✨ Claude Edits</span><span class="flow-arrow">→</span>
+      <span class="flow-step">📚 Your Chapter</span>
+    </div>
+
+    <div class="mod-h2">Tool 1: Whisper — Speak, Get Text</div>
+    <div class="prompt-card">
+      <p class="mod-p">Whisper by OpenAI converts your spoken audio into written text with remarkable accuracy. Access it via <a href="https://openai.com" target="_blank" style="color:var(--forest);font-weight:600;">openai.com</a> or through apps like Otter.ai.</p>
+      <ul class="step-list">
+        <li><span class="step-num">1</span><p>Find a quiet place and open a voice recording app on your phone.</p></li>
+        <li><span class="step-num">2</span><p>Press record and talk naturally — tell your story as if speaking to a grandchild.</p></li>
+        <li><span class="step-num">3</span><p>Upload the audio to a Whisper-powered tool. It converts speech to text in seconds.</p></li>
+        <li><span class="step-num">4</span><p>Copy the text and paste it into ChatGPT to create a polished chapter.</p></li>
+      </ul>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Paste into ChatGPT after transcription</div><div class="prompt-txt">"Here is a transcript of me telling a story from my life. Please turn this into a warm, well-written memoir chapter. Keep my voice and personality. Add transitions and paragraph breaks where needed. Do not change the meaning or add facts I did not mention: [paste your transcript here]"</div><button class="copy-btn" onclick="copyPrompt(this,'Here is a transcript of me telling a story from my life. Please turn this into a warm, well-written memoir chapter. Keep my voice and personality. Add transitions and paragraph breaks where needed. Do not change the meaning or add facts I did not mention: [paste your transcript here]')">Copy</button></div>
+    </div>
+
+    <div class="mod-h2">Tool 2: ChatGPT Voice Mode — Be Interviewed</div>
+    <div class="prompt-card">
+      <p class="mod-p">On the ChatGPT app, tap the microphone to enter voice mode. ChatGPT speaks back to you — and can act as an interviewer, asking questions that draw out your memories.</p>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Say this to start your memoir interview</div><div class="prompt-txt">"I want you to interview me about my life, one question at a time. I am writing a memoir. Please ask me thoughtful questions about my childhood, my career, the challenges I have faced, and the things I am most proud of. Start with the first question now."</div><button class="copy-btn" onclick="copyPrompt(this,'I want you to interview me about my life, one question at a time. I am writing a memoir. Please ask me thoughtful questions about my childhood, my career, the challenges I have faced, and the things I am most proud of. Start with the first question now.')">Copy</button></div>
+    </div>
+
+    <div class="mod-h2">Tool 3: Microsoft Word Dictate</div>
+    <div class="prompt-card">
+      <p class="mod-p">If you have Microsoft Word, you already have this feature — completely free. Click <strong>Home → Dictate</strong> (the microphone icon). Say "comma", "full stop", "new paragraph" to add punctuation as you speak.</p>
+    </div>
+
+    <div class="mod-h2">Tool 4: Otter.ai — Record Interviews</div>
+    <div class="prompt-card">
+      <p class="mod-p">Perfect for recording conversations with family members. Visit <a href="https://otter.ai" target="_blank" style="color:var(--forest);font-weight:600;">otter.ai</a> — it records and transcribes conversations between multiple people.</p>
+      <div class="prompt-box"><div class="prompt-lbl">📋 After uploading your Otter transcript to ChatGPT</div><div class="prompt-txt">"Here is a transcript of an interview with my [mother/father/relative]. Please identify the most interesting stories and write them as vivid narrative paragraphs for a family history book. Keep their authentic voice: [paste transcript]"</div><button class="copy-btn" onclick="copyPrompt(this,'Here is a transcript of an interview with my [mother/father/relative]. Please identify the most interesting stories and write them as vivid narrative paragraphs for a family history book. Keep their authentic voice: [paste transcript]')">Copy</button></div>
+    </div>
+
+    <div class="mod-h2">Tool 5: NotebookLM — Organise Everything</div>
+    <div class="prompt-card">
+      <p class="mod-p">Upload all your transcripts to <a href="https://notebooklm.google.com" target="_blank" style="color:var(--forest);font-weight:600;">notebooklm.google.com</a> and ask questions like:</p>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Questions to ask NotebookLM</div><div class="prompt-txt">"What themes appear most often in my interviews?" · "What stories about my childhood are in these notes?" · "Summarise everything I said about my first job."</div></div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-lbl">🎙️ Exercise 2 — Speak a Memory</div>
+      <div class="mod-h3">Tell the Story of Your First Day at School</div>
+      <p>Record yourself for at least 3 minutes — do not write anything, only speak. Transcribe using Otter.ai or Word Dictate, then paste into ChatGPT with the prompt above. Bring the result to your AI Tutor for feedback!</p>
+    </div>
+
+    <div class="mod-footer">
+      <button class="btn-mod btn-outline" onclick="showPage('mod1')">← Module 1</button>
+      <button class="btn-mod btn-terra" onclick="showPage('mod3')">Next: ChatGPT →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ MODULE 3 ═══════════════ -->
+<div class="page" id="page-mod3">
+  <div class="mod-hero">
+    <div class="container">
+      <div class="mod-label">Module 3 of 8 · Writing & Drafting</div>
+      <h1>ChatGPT — <em>Your Writing Companion</em></h1>
+      <p>ChatGPT is a brilliant, patient writing partner who is always available. Learn to brainstorm, outline, draft, and even get interviewed about your life.</p>
+      <div class="mod-nav-pills" id="pills3"></div>
+    </div>
+  </div>
+  <div class="mod-body">
+    <div class="intro-card"><p><strong>ChatGPT is where most authors begin.</strong> Available free at <a href="https://chatgpt.com" target="_blank" style="color:var(--forest);font-weight:600;">chatgpt.com</a>. Think of it as a conversation — write naturally and it responds helpfully. The more context you give, the better it works.</p></div>
+
+    <div class="john-box">
+      <div class="john-box-icon">👨🏾‍🏫</div>
+      <div><div class="john-box-label">John Uses ChatGPT</div><p>John typed: "I am a 67-year-old retired teacher from Nairobi. Give me 20 chapter ideas about growing up in Kenya in the 1960s." ChatGPT gave him 20 ideas in 20 seconds. Three of them made him cry — they were exactly the stories he had always wanted to tell.</p></div>
+    </div>
+
+    <div class="mod-h2">What ChatGPT Can Do For You</div>
+
+    <div class="prompt-card">
+      <div class="mod-h3">💡 Brainstorm Chapter Ideas</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Copy this prompt</div><div class="prompt-txt">"I am writing a memoir about growing up in [your country] in the [decade]. Give me 20 chapter ideas that would make a reader feel like they were there."</div><button class="copy-btn" onclick="copyPrompt(this,'I am writing a memoir about growing up in [your country] in the [decade]. Give me 20 chapter ideas that would make a reader feel like they were there.')">Copy</button></div>
+    </div>
+    <div class="prompt-card">
+      <div class="mod-h3">📋 Create a Full Outline</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Copy this prompt</div><div class="prompt-txt">"Create a 12-chapter outline for a memoir about [your topic]. Each chapter should have a title and a 2-sentence summary of what happens."</div><button class="copy-btn" onclick="copyPrompt(this,'Create a 12-chapter outline for a memoir about [your topic]. Each chapter should have a title and a 2-sentence summary of what happens.')">Copy</button></div>
+    </div>
+    <div class="prompt-card">
+      <div class="mod-h3">✍️ Draft a Chapter</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Copy this prompt</div><div class="prompt-txt">"Here are my rough notes about [topic]. Please write this as a warm, engaging memoir chapter of about 600 words in first person. Keep it vivid and personal: [paste your notes]"</div><button class="copy-btn" onclick="copyPrompt(this,'Here are my rough notes about [topic]. Please write this as a warm, engaging memoir chapter of about 600 words in first person. Keep it vivid and personal: [paste your notes]')">Copy</button></div>
+    </div>
+    <div class="prompt-card">
+      <div class="mod-h3">🎤 Ask ChatGPT to Interview You</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Copy this prompt</div><div class="prompt-txt">"I want you to interview me for my memoir. Ask me one question at a time about my childhood, career, and life lessons. Wait for my answer before asking the next question. Start now."</div><button class="copy-btn" onclick="copyPrompt(this,'I want you to interview me for my memoir. Ask me one question at a time about my childhood, career, and life lessons. Wait for my answer before asking the next question. Start now.')">Copy</button></div>
+    </div>
+    <div class="prompt-card">
+      <div class="mod-h3">✏️ Rewrite for Tone</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Copy this prompt</div><div class="prompt-txt">"Rewrite this paragraph to sound warmer and more conversational — like a wise elder telling a story to their grandchildren. Do not change the meaning: [paste paragraph]"</div><button class="copy-btn" onclick="copyPrompt(this,'Rewrite this paragraph to sound warmer and more conversational — like a wise elder telling a story to their grandchildren. Do not change the meaning: [paste paragraph]')">Copy</button></div>
+    </div>
+    <div class="prompt-card">
+      <div class="mod-h3">📖 Write Your Author Biography</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Copy this prompt</div><div class="prompt-txt">"Write a warm and engaging author biography for the back of my memoir. Here are the key facts about me: [list your background, career, family, location]. Make it 120 words."</div><button class="copy-btn" onclick="copyPrompt(this,'Write a warm and engaging author biography for the back of my memoir. Here are the key facts about me: [list your background, career, family, location]. Make it 120 words.')">Copy</button></div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-lbl">✍️ Exercise 3 — Generate Your Memoir Outline</div>
+      <div class="mod-h3">Create a 10-Chapter Outline</div>
+      <p>Visit <a href="https://chatgpt.com" target="_blank" style="color:var(--forest);font-weight:600;">chatgpt.com</a> and use this prompt — filling in your own details. Then paste the result into your AI Tutor (Amara) for feedback.</p>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Your personalised prompt</div><div class="prompt-txt">"I am writing a memoir. I am [your age] years old, from [your country]. I worked as [your career] for [years]. My book is about [your theme]. Please give me a 10-chapter outline with a title and 2-sentence summary for each chapter."</div><button class="copy-btn" onclick="copyPrompt(this,'I am writing a memoir. I am [your age] years old, from [your country]. I worked as [your career] for [years]. My book is about [your theme]. Please give me a 10-chapter outline with a title and 2-sentence summary for each chapter.')">Copy</button></div>
+    </div>
+
+    <div class="mod-footer">
+      <button class="btn-mod btn-outline" onclick="showPage('mod2')">← Module 2</button>
+      <button class="btn-mod btn-terra" onclick="showPage('mod4')">Next: Claude — Your Editor →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ MODULE 4 ═══════════════ -->
+<div class="page" id="page-mod4">
+  <div class="mod-hero">
+    <div class="container">
+      <div class="mod-label">Module 4 of 8 · Editing</div>
+      <h1>Claude — <em>The Thoughtful Editor</em></h1>
+      <p>If ChatGPT is your writing partner, Claude is your experienced editor. Claude reads your writing with genuine care and refines it to professional quality — even with full chapters.</p>
+      <div class="mod-nav-pills" id="pills4"></div>
+    </div>
+  </div>
+  <div class="mod-body">
+    <div class="intro-card"><p><strong>Claude handles long pieces of writing exceptionally well.</strong> It reads carefully and focuses on tone, flow, and emotional truth — not just grammar. Visit <a href="https://claude.ai" target="_blank" style="color:var(--forest);font-weight:600;">claude.ai</a> for a free account.</p></div>
+
+    <div class="john-box">
+      <div class="john-box-icon">👨🏾‍🏫</div>
+      <div><div class="john-box-label">John Uploads His Chapter</div><p>John pasted 4 pages into Claude: "Please help me improve this. I want it emotionally powerful but not overdramatic. Keep my voice." Claude returned a beautifully edited version with notes explaining every change. "Like having a professional editor who actually cared," John said.</p></div>
+    </div>
+
+    <div class="mod-h2">Why Claude is Different From ChatGPT</div>
+    <ul class="step-list">
+      <li><span class="step-num">📖</span><p><strong>Long manuscripts</strong> — paste a full chapter (even 10+ pages) and Claude reads all of it</p></li>
+      <li><span class="step-num">🎙️</span><p><strong>Voice preservation</strong> — improves your writing without making it sound like someone else wrote it</p></li>
+      <li><span class="step-num">💝</span><p><strong>Emotional depth</strong> — finds places where more feeling would make your story richer</p></li>
+      <li><span class="step-num">🔁</span><p><strong>Structural issues</strong> — notices when chapters feel choppy, repetitive, or out of order</p></li>
+    </ul>
+
+    <div class="mod-h2">Editing Prompts to Use in Claude</div>
+
+    <div class="prompt-card">
+      <div class="mod-h3">Full Manuscript Review</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Copy this prompt</div><div class="prompt-txt">"I am writing a memoir. Please review this chapter carefully. Tell me: (1) what is working well emotionally, (2) any sections that feel repetitive or weak, (3) where the writing could be more vivid, (4) transitions that need smoothing. Then provide an improved version: [paste your chapter]"</div><button class="copy-btn" onclick="copyPrompt(this,'I am writing a memoir. Please review this chapter carefully. Tell me: (1) what is working well emotionally, (2) any sections that feel repetitive or weak, (3) where the writing could be more vivid, (4) transitions that need smoothing. Then provide an improved version: [paste your chapter]')">Copy</button></div>
+    </div>
+    <div class="prompt-card">
+      <div class="mod-h3">Make a Paragraph More Vivid</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Copy this prompt</div><div class="prompt-txt">"Rewrite this paragraph in the style of a bestselling memoir — vivid, emotional, and deeply human. Keep the same facts but make the reader feel like they are there: [paste paragraph]"</div><button class="copy-btn" onclick="copyPrompt(this,'Rewrite this paragraph in the style of a bestselling memoir — vivid, emotional, and deeply human. Keep the same facts but make the reader feel like they are there: [paste paragraph]')">Copy</button></div>
+    </div>
+    <div class="prompt-card">
+      <div class="mod-h3">Strengthen Your Opening</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Copy this prompt</div><div class="prompt-txt">"Read this opening paragraph of my memoir. Does it make you want to keep reading? What would make it more powerful? Rewrite it to create a stronger hook: [paste your opening]"</div><button class="copy-btn" onclick="copyPrompt(this,'Read this opening paragraph of my memoir. Does it make you want to keep reading? What would make it more powerful? Rewrite it to create a stronger hook: [paste your opening]')">Copy</button></div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-lbl">✏️ Exercise 4 — Edit With Claude</div>
+      <div class="mod-h3">Take Your ChatGPT Draft to Claude</div>
+      <p>Take the chapter or paragraph you created in Module 3. Paste it into Claude at <a href="https://claude.ai" target="_blank" style="color:var(--forest);font-weight:600;">claude.ai</a> and ask it to improve it. Then bring both versions — before and after — to your AI Tutor and ask: <em>"Which version is better and why?"</em></p>
+    </div>
+
+    <div class="mod-footer">
+      <button class="btn-mod btn-outline" onclick="showPage('mod3')">← Module 3</button>
+      <button class="btn-mod btn-terra" onclick="showPage('mod5')">Next: Perplexity →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ MODULE 5 ═══════════════ -->
+<div class="page" id="page-mod5">
+  <div class="mod-hero">
+    <div class="container">
+      <div class="mod-label">Module 5 of 8 · Research</div>
+      <h1>Perplexity AI — <em>Your Fact Checker</em></h1>
+      <p>Every memoir needs accurate facts. Perplexity AI finds real answers with real sources — so you can verify everything you write.</p>
+      <div class="mod-nav-pills" id="pills5"></div>
+    </div>
+  </div>
+  <div class="mod-body">
+    <div class="intro-card"><p><strong>Unlike general AI tools, Perplexity searches the web in real time</strong> and provides citations for every claim. You can click the source and read the original article. Visit <a href="https://www.perplexity.ai" target="_blank" style="color:var(--forest);font-weight:600;">perplexity.ai</a> — free with no account needed.</p></div>
+
+    <div class="john-box">
+      <div class="john-box-icon">👨🏾‍🏫</div>
+      <div><div class="john-box-label">John Checks His Facts</div><p>John searched: "What were the major droughts in Kenya in the 1960s?" Perplexity gave him exact dates, location details, and links to historical records. Now his memoir has accurate details that bring the period to life.</p></div>
+    </div>
+
+    <div class="mod-h2">What to Research for Your Memoir</div>
+
+    <div class="prompt-card">
+      <div class="mod-h3">🗺️ Historical Events & Daily Life</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Search ideas for Perplexity</div><div class="prompt-txt">"What was daily life like in [your city] in [decade]?" · "What major events happened in [your country] in [year]?" · "What did school / food / transport look like in [place] in [era]?"</div><button class="copy-btn" onclick="copyPrompt(this,'What was daily life like in [your city] in [decade]?')">Copy first</button></div>
+    </div>
+    <div class="prompt-card">
+      <div class="mod-h3">🌳 Family History Research</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Search ideas for Perplexity</div><div class="prompt-txt">"Where can I find birth and marriage records for [your country / region]?" · "What genealogy databases cover [Africa / Asia / Caribbean]?" · "How do I trace my family history using [specific records]?"</div><button class="copy-btn" onclick="copyPrompt(this,'Where can I find birth and marriage records for [your country or region]?')">Copy first</button></div>
+    </div>
+    <div class="prompt-card">
+      <div class="mod-h3">🎓 Academic Mode — For Deep Research</div>
+      <p class="mod-p">Perplexity has an <strong>Academic mode</strong> that searches only peer-reviewed papers. Click the "Focus" dropdown and select "Academic". Useful for health, agriculture, social history, or migration topics.</p>
+    </div>
+    <div class="prompt-card">
+      <div class="mod-h3">📍 Add Real Detail to Your Scenes</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Then paste this into ChatGPT</div><div class="prompt-txt">"I found these historical facts about [place and time]: [paste your Perplexity results]. I am writing a memoir chapter set in this time and place. Please weave these details naturally into my scene to make it feel authentic: [paste your chapter draft]"</div><button class="copy-btn" onclick="copyPrompt(this,'I found these historical facts about [place and time]: [paste your Perplexity results]. Please weave these details naturally into my scene to make it feel authentic: [paste your chapter draft]')">Copy</button></div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-lbl">🔍 Exercise 5 — Research Your Setting</div>
+      <div class="mod-h3">Find Three Historical Details</div>
+      <p>Think of a chapter set in a specific place and time. Search Perplexity for three real historical details — a local event, something about daily life, or a cultural tradition. Then ask your AI Tutor: <em>"How do I weave these facts naturally into my memoir chapter?"</em></p>
+    </div>
+
+    <div class="mod-footer">
+      <button class="btn-mod btn-outline" onclick="showPage('mod4')">← Module 4</button>
+      <button class="btn-mod btn-terra" onclick="showPage('mod6')">Next: Napkin AI →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ MODULE 6 ═══════════════ -->
+<div class="page" id="page-mod6">
+  <div class="mod-hero">
+    <div class="container">
+      <div class="mod-label">Module 6 of 8 · Visuals</div>
+      <h1>Napkin AI — <em>Turn Ideas into Visuals</em></h1>
+      <p>Napkin AI converts your written text into beautiful diagrams, timelines, and flowcharts instantly — no design skills needed.</p>
+      <div class="mod-nav-pills" id="pills6"></div>
+    </div>
+  </div>
+  <div class="mod-body">
+    <div class="intro-card"><p><strong>Many authors struggle to explain ideas visually.</strong> Napkin AI solves this. Visit <a href="https://www.napkin.ai" target="_blank" style="color:var(--forest);font-weight:600;">napkin.ai</a>, paste text, and it offers you several beautiful visual formats instantly.</p></div>
+
+    <div class="john-box">
+      <div class="john-box-icon">👨🏾‍🏫</div>
+      <div><div class="john-box-label">John Creates a Life Timeline</div><p>John typed: "My life journey: born in Murang'a 1957, started school 1963, moved to Nairobi 1970, began teaching 1979, married 1982, retired 2018." Napkin AI turned this into a beautiful illustrated timeline in seconds — and John used it as the opening visual page of his memoir.</p></div>
+    </div>
+
+    <div class="mod-h2">Four Visuals Every Memoir Needs</div>
+
+    <div class="prompt-card">
+      <div class="mod-h3">📅 Life Timeline</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Paste this kind of text into Napkin AI</div><div class="prompt-txt">"My life: Born in [place] in [year]. Started school in [year]. Moved to [place] in [year]. Started career as [job] in [year]. Got married in [year]. Had children in [years]. Retired in [year]. Began writing in [year]."</div><button class="copy-btn" onclick="copyPrompt(this,'My life: Born in [place] in [year]. Started school in [year]. Moved to [place] in [year]. Started career as [job] in [year]. Got married in [year]. Had children in [years]. Retired in [year]. Began writing in [year].')">Copy</button></div>
+    </div>
+    <div class="prompt-card">
+      <div class="mod-h3">🌳 Family Tree</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Paste this kind of text into Napkin AI</div><div class="prompt-txt">"Family structure: Grandfather [name] married [name]. They had [number] children: [names]. My father [name] married my mother [name]. They had [number] children. I am [your name], the [first/second/third] child."</div><button class="copy-btn" onclick="copyPrompt(this,'Family structure: Grandfather [name] married [name]. They had [number] children. My father [name] married my mother [name]. They had [number] children. I am [your name], the [first/second/third] child.')">Copy</button></div>
+    </div>
+    <div class="prompt-card">
+      <div class="mod-h3">📚 Chapter Theme Map</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Paste this kind of text into Napkin AI</div><div class="prompt-txt">"My memoir has these main themes that connect: Childhood and roots. Education and becoming a teacher. Marriage and family. Struggles and resilience. Legacy and lessons learned. Each theme grows from the one before."</div><button class="copy-btn" onclick="copyPrompt(this,'My memoir has these main themes: Childhood and roots. Education and becoming a teacher. Marriage and family. Struggles and resilience. Legacy and lessons learned. Each theme grows from the one before.')">Copy</button></div>
+    </div>
+    <div class="prompt-card">
+      <div class="mod-h3">🗺️ Journey Map</div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Paste this kind of text into Napkin AI</div><div class="prompt-txt">"My journey: Started in [village/town]. Moved to [city] for school. Worked in [place] for [years]. Then moved to [place]. Eventually settled in [place]. The journey taught me [lesson]."</div><button class="copy-btn" onclick="copyPrompt(this,'My journey: Started in [village/town]. Moved to [city] for school. Worked in [place]. Eventually settled in [place]. The journey taught me [lesson].')">Copy</button></div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-lbl">🎨 Exercise 6 — Create Your Life Timeline</div>
+      <div class="mod-h3">Your Story, Visualised</div>
+      <p>Write out the 8-10 most important events of your life in simple text — dates and short descriptions. Paste them into <a href="https://www.napkin.ai" target="_blank" style="color:var(--forest);font-weight:600;">napkin.ai</a> and let it create your personal timeline. Share the result with Amara and ask: <em>"How could I use this in my memoir?"</em></p>
+    </div>
+
+    <div class="mod-footer">
+      <button class="btn-mod btn-outline" onclick="showPage('mod5')">← Module 5</button>
+      <button class="btn-mod btn-terra" onclick="showPage('mod7')">Next: AI Images →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ MODULE 7 ═══════════════ -->
+<div class="page" id="page-mod7">
+  <div class="mod-hero">
+    <div class="container">
+      <div class="mod-label">Module 7 of 8 · Design</div>
+      <h1>AI Images — <em>Book Covers &amp; Illustrations</em></h1>
+      <p>A beautiful cover sells your memoir before anyone reads a single page. AI image generation makes professional-quality illustrations possible — without hiring a designer.</p>
+      <div class="mod-nav-pills" id="pills7"></div>
+    </div>
+  </div>
+  <div class="mod-body">
+    <div class="intro-card"><p><strong>You do not need design skills.</strong> You only need words. Describe what you want in plain language and AI creates it. The better your description, the more beautiful the result.</p></div>
+
+    <div class="john-box">
+      <div class="john-box-icon">👨🏾‍🏫</div>
+      <div><div class="john-box-label">John Designs His Cover</div><p>John typed: "A watercolour illustration of a Kenyan village schoolroom in the 1970s, warm afternoon light through the windows, children at wooden desks, soft earth tones." The image made him emotional. It was exactly what he had pictured for forty years.</p></div>
+    </div>
+
+    <div class="mod-h2">Tool 1: ChatGPT Image Generation</div>
+    <div class="prompt-card">
+      <p class="mod-p">ChatGPT (paid plan) generates images directly in chat. Simply describe what you want in detail.</p>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Book cover image prompt</div><div class="prompt-txt">"Create a watercolour book cover for a memoir titled '[Your Title]'. The image should show [describe your scene — people, place, era, mood]. Use warm, earthy colours. Leave space at the top for the title in large text."</div><button class="copy-btn" onclick="copyPrompt(this,'Create a watercolour book cover for a memoir titled [Your Title]. The image should show [describe your scene]. Use warm, earthy colours. Leave space at the top for the title in large text.')">Copy</button></div>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Chapter illustration prompt</div><div class="prompt-txt">"A detailed illustration of [scene from your book — e.g., a rural African market in the 1960s, sellers with colourful cloth and vegetables, busy and full of life]. Style: soft watercolour painting. Warm, nostalgic mood."</div><button class="copy-btn" onclick="copyPrompt(this,'A detailed illustration of [scene from your book]. Style: soft watercolour painting. Warm, nostalgic mood.')">Copy</button></div>
+    </div>
+
+    <div class="mod-h2">Tool 2: Canva AI — Free and Easy</div>
+    <div class="prompt-card">
+      <p class="mod-p">Visit <a href="https://www.canva.com" target="_blank" style="color:var(--forest);font-weight:600;">canva.com</a> (free account). Click Create a Design → Book Cover. Use the AI image generator built inside Canva — it is very simple to use.</p>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Social media book announcement</div><div class="prompt-txt">"Create a book announcement social media post for a memoir titled '[Your Title]' by [Your Name]. Background: [colour]. Feature the book cover. Include the text: 'Coming soon'. Make it elegant and memorable."</div><button class="copy-btn" onclick="copyPrompt(this,'Create a book announcement social media post for a memoir titled [Your Title] by [Your Name]. Background: [colour]. Feature the book cover. Include: Coming soon. Make it elegant.')">Copy</button></div>
+    </div>
+
+    <div class="mod-h2">Tips for Better Image Prompts</div>
+    <ul class="step-list">
+      <li><span class="step-num">1</span><p><strong>Describe the mood:</strong> "warm and nostalgic", "hopeful", "bittersweet", "celebratory"</p></li>
+      <li><span class="step-num">2</span><p><strong>Name a style:</strong> "watercolour painting", "oil painting", "pencil sketch", "vintage photograph style"</p></li>
+      <li><span class="step-num">3</span><p><strong>Include era and location:</strong> "1970s rural Kenya", "1950s Nairobi city centre", "1960s Caribbean village"</p></li>
+      <li><span class="step-num">4</span><p><strong>Describe the light:</strong> "warm afternoon sunlight", "golden hour", "soft morning mist"</p></li>
+    </ul>
+
+    <div class="exercise-box">
+      <div class="exercise-lbl">🖼️ Exercise 7 — Design Your Book Cover</div>
+      <div class="mod-h3">Create Your First Cover</div>
+      <p>Visit <a href="https://www.canva.com" target="_blank" style="color:var(--forest);font-weight:600;">canva.com</a> and start a Book Cover template. Use the AI image generator inside Canva to create your cover image. Add your title and name. Bring it to Amara for feedback — she can help you describe a better image prompt.</p>
+    </div>
+
+    <div class="mod-footer">
+      <button class="btn-mod btn-outline" onclick="showPage('mod6')">← Module 6</button>
+      <button class="btn-mod btn-terra" onclick="showPage('mod8')">Next: Your Workflow →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ MODULE 8 ═══════════════ -->
+<div class="page" id="page-mod8">
+  <div class="mod-hero">
+    <div class="container">
+      <div class="mod-label">Module 8 of 8 · The Full Picture</div>
+      <h1>Your Complete <em>Author Workflow</em></h1>
+      <p>You now have a full AI team. This final module shows you how to put it all together — from first spoken word to published book.</p>
+      <div class="mod-nav-pills" id="pills8"></div>
+    </div>
+  </div>
+  <div class="mod-body">
+
+    <div class="john-box">
+      <div class="john-box-icon">👨🏾‍🏫</div>
+      <div><div class="john-box-label">John Finishes His Book</div><p>Eight weeks after starting this course, John has a complete 180-page memoir draft, a family history booklet, a watercolour book cover, and a PowerPoint ready for his launch at the local library. "I did not think I could do any of this," he says. "Now I cannot stop writing."</p></div>
+    </div>
+
+    <div class="mod-h2">Your Complete Workflow — Step by Step</div>
+
+    <div class="prompt-card"><div class="mod-h3" style="color:var(--forest);">Step 1 · Gather Your Memories <span style="color:var(--ink-muted);font-size:.82rem;font-weight:400">— Otter.ai / Whisper / ChatGPT Voice</span></div><p class="mod-p">Record yourself telling stories. Interview family members. Use ChatGPT voice mode to be interviewed. Save everything as audio or text.</p></div>
+    <div class="prompt-card"><div class="mod-h3" style="color:var(--forest);">Step 2 · Transcribe <span style="color:var(--ink-muted);font-size:.82rem;font-weight:400">— Whisper / Otter.ai / Word Dictate</span></div><p class="mod-p">Convert spoken recordings into written transcripts. You now have raw material — the seeds of your chapters.</p></div>
+    <div class="prompt-card"><div class="mod-h3" style="color:var(--forest);">Step 3 · Organise & Outline <span style="color:var(--ink-muted);font-size:.82rem;font-weight:400">— NotebookLM / ChatGPT</span></div><p class="mod-p">Upload transcripts to NotebookLM to find themes. Use ChatGPT to build your chapter outline.</p></div>
+    <div class="prompt-card"><div class="mod-h3" style="color:var(--forest);">Step 4 · Draft Chapters <span style="color:var(--ink-muted);font-size:.82rem;font-weight:400">— ChatGPT</span></div><p class="mod-p">Paste your transcript and notes into ChatGPT. Ask it to draft each chapter. Work through chapter by chapter.</p></div>
+    <div class="prompt-card"><div class="mod-h3" style="color:var(--forest);">Step 5 · Research & Verify <span style="color:var(--ink-muted);font-size:.82rem;font-weight:400">— Perplexity AI</span></div><p class="mod-p">Fact-check dates, events, and historical details. Add real historical colour and accuracy to your memoir.</p></div>
+    <div class="prompt-card"><div class="mod-h3" style="color:var(--forest);">Step 6 · Edit & Refine <span style="color:var(--ink-muted);font-size:.82rem;font-weight:400">— Claude</span></div><p class="mod-p">Paste each chapter into Claude for professional editing. Preserve your voice, strengthen your scenes.</p></div>
+    <div class="prompt-card"><div class="mod-h3" style="color:var(--forest);">Step 7 · Create Visuals <span style="color:var(--ink-muted);font-size:.82rem;font-weight:400">— Napkin AI / Canva</span></div><p class="mod-p">Build your timeline, family tree, and chapter maps with Napkin. Design your cover and illustrations with Canva.</p></div>
+    <div class="prompt-card"><div class="mod-h3" style="color:var(--forest);">Step 8 · Share Your Book <span style="color:var(--ink-muted);font-size:.82rem;font-weight:400">— Print / eBook / Social Media</span></div><p class="mod-p">Export to Word and send to a local printer, publish as a PDF, or share digitally. Host a book launch!</p></div>
+
+    <div class="mod-h2">Four Practical Projects</div>
+    <div class="prompt-card" style="border-left:4px solid var(--terracotta);"><div class="mod-h3">Project 1 — Write a Memoir Chapter</div><p class="mod-p">Using Modules 2, 3, and 4: speak, transcribe, draft with ChatGPT, edit with Claude. Target: one complete polished chapter.</p></div>
+    <div class="prompt-card" style="border-left:4px solid var(--gold);"><div class="mod-h3">Project 2 — Family History Booklet</div><p class="mod-p">Interview two family members using Otter.ai. Use Perplexity for historical context. Draft with ChatGPT. Add a family tree from Napkin AI.</p></div>
+    <div class="prompt-card" style="border-left:4px solid var(--forest);"><div class="mod-h3">Project 3 — Research a Historical Event</div><p class="mod-p">Choose a historical event relevant to your story. Use Perplexity in Academic mode. Write a 500-word fact-checked article.</p></div>
+    <div class="prompt-card" style="border-left:4px solid #6B3FBC;"><div class="mod-h3">Project 4 — Book Launch Presentation</div><p class="mod-p">Create a 10-slide presentation about your book: your story, an excerpt, your cover image, and why people should read it.</p></div>
+
+    <div class="exercise-box">
+      <div class="exercise-lbl">🎓 Final Exercise — Your Dedication Page</div>
+      <div class="mod-h3">Write a Dedication</div>
+      <p>Every book has a dedication page. Use ChatGPT to help you write yours:</p>
+      <div class="prompt-box"><div class="prompt-lbl">📋 Dedication prompt</div><div class="prompt-txt">"Help me write a heartfelt book dedication for my memoir. This book is for [who]. I want them to know [what]. The tone should be [warm/serious/poetic]. Here are some words that feel important to me: [your words]."</div><button class="copy-btn" onclick="copyPrompt(this,'Help me write a heartfelt book dedication for my memoir. This book is for [who]. I want them to know [what]. The tone should be [warm/serious/poetic]. Here are some words that feel important: [your words].')">Copy</button></div>
+    </div>
+
+    <div class="completion-banner">
+      <div style="font-size:3rem;margin-bottom:.75rem;">🎉</div>
+      <h2>You Have Completed the Course!</h2>
+      <p>Amara is still here for you — any time you get stuck, have a question, or want feedback on your writing. The journey continues.</p>
+      <button class="btn-hero-primary" onclick="showPage('tutor')">Keep Writing With Amara →</button>
+    </div>
+
+    <div class="mod-footer">
+      <button class="btn-mod btn-outline" onclick="showPage('mod7')">← Module 7</button>
+      <button class="btn-mod btn-forest" onclick="showPage('home')">Back to Course Home</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ TUTOR PAGE ═══════════════ -->
+<div class="page" id="page-tutor">
+  <div class="tutor-layout">
+    <div class="tutor-sidebar">
+      <div class="ts-title">🤖 Your AI Tutor</div>
+      <p class="ts-sub">Powered by Claude + web search. Ask anything about the course, AI tools, or your writing.</p>
+      <div class="ts-section">
+        <div class="ts-section-lbl">Quick Questions</div>
+        <button class="quick-q" onclick="sendQuick('What is AI and how can it help me write my book?')">What is AI and how can it help me write my book?</button>
+        <button class="quick-q" onclick="sendQuick('I type slowly — what is the easiest AI tool to start with?')">I type slowly — where should I start?</button>
+        <button class="quick-q" onclick="sendQuick('Can you give me a prompt I can copy into ChatGPT to start my memoir?')">Give me a first prompt for my memoir</button>
+        <button class="quick-q" onclick="sendQuick('What is the difference between ChatGPT and Claude?')">ChatGPT vs Claude — what is the difference?</button>
+        <button class="quick-q" onclick="sendQuick('How do I use Perplexity to research my family history?')">How do I research family history?</button>
+        <button class="quick-q" onclick="sendQuick('I have completed all 8 modules. What should I do next to actually publish my book?')">I finished the course — what next?</button>
+      </div>
+      <div class="ts-section">
+        <div class="ts-section-lbl">Practice Tasks</div>
+        <div class="task-card-s">
+          <div class="lbl">📝 Task 1 — Module 2</div>
+          <div class="ttl">Speak a Memory</div>
+          <div class="dsc">Record yourself for 3 minutes telling a childhood story. Then get help turning it into a chapter.</div>
+          <button onclick="sendQuick('I just spoke a memory for 3 minutes. Here is what I said: [describe your memory]. Please help me turn this into a memoir chapter using ChatGPT, and tell me what prompt to use.')">Get help with this task ↗</button>
+        </div>
+        <div class="task-card-s">
+          <div class="lbl">✍️ Task 2 — Module 3</div>
+          <div class="ttl">Memoir Outline Review</div>
+          <div class="dsc">Use ChatGPT to create a memoir outline, then paste it here for feedback.</div>
+          <button onclick="sendQuick('I used ChatGPT to create a memoir outline. Here are my chapter ideas: [paste your ideas here]. Please review them and suggest improvements.')">Paste your outline ↗</button>
+        </div>
+        <div class="task-card-s">
+          <div class="lbl">✏️ Task 3 — Module 4</div>
+          <div class="ttl">Edit a Paragraph</div>
+          <div class="dsc">Paste a paragraph from your memoir and get it edited in the style of Claude.</div>
+          <button onclick="sendQuick('Please help me edit this paragraph from my memoir in the style of a professional editor: [paste your paragraph here]. Make it warmer, more vivid, and emotionally richer.')">Get editing help ↗</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-area">
+      <div class="chat-header">
+        <div class="t-avatar">📚</div>
+        <div>
+          <div class="t-name">Amara — Your Writing Tutor</div>
+          <div class="t-status"><div class="sdot"></div> Available now · Knows this entire course</div>
+        </div>
+        <div class="source-pills">
+          <span class="spill spill-c">Claude AI</span>
+          <span class="spill spill-w">Web Search</span>
+        </div>
+      </div>
+
+      <div class="messages" id="messages">
+        <div class="msg tutor-msg">
+          <div class="m-av">📚</div>
+          <div class="m-bubble">
+            <p>Hello, and <strong>welcome!</strong> 🎉 I am Amara, your personal writing tutor. I am here to help you every step of the way through this course.</p>
+            <p>You can ask me <strong>anything</strong> — about AI tools, how to write your memoir, what prompts to use in ChatGPT, or how to structure your book. I will also search the web when I need current information for you.</p>
+            <p>You can also <strong>paste your writing here</strong> and I will give you honest, kind feedback — just like a real editor would.</p>
+            <p><em>What would you like to work on today?</em></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <div class="input-row">
+          <textarea class="chat-input" id="userInput" placeholder="Type your question here... or paste your writing for feedback" rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+          <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="Send">➤</button>
+        </div>
+        <div class="input-hint">Press Enter to send · Shift+Enter for new line · Paste writing here for editing feedback</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══ PAGE NAVIGATION ═══
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+  buildNavPills(id);
+}
+
+// ═══ MODULE NAV PILLS ═══
+const mods = [
+  {id:'mod1',label:'1. What is AI'},
+  {id:'mod2',label:'2. Speak'},
+  {id:'mod3',label:'3. ChatGPT'},
+  {id:'mod4',label:'4. Claude'},
+  {id:'mod5',label:'5. Perplexity'},
+  {id:'mod6',label:'6. Napkin'},
+  {id:'mod7',label:'7. Images'},
+  {id:'mod8',label:'8. Workflow'},
+];
+function buildNavPills(currentId) {
+  for (let i = 1; i <= 8; i++) {
+    const el = document.getElementById('pills' + i);
+    if (!el) continue;
+    el.innerHTML = '';
+    mods.forEach(m => {
+      const btn = document.createElement('button');
+      btn.textContent = m.label;
+      if (m.id === currentId) btn.classList.add('active-pill');
+      btn.onclick = () => showPage(m.id);
+      el.appendChild(btn);
+    });
+  }
+}
+
+// ═══ COPY PROMPT ═══
+function copyPrompt(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    btn.textContent = '✓ Copied!'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ═══ AI TUTOR ═══
+const SYSTEM = `You are Amara, a warm, encouraging, and knowledgeable AI writing tutor for a course called "AI for Authors & Storytellers: Speak, Research, Write & Publish with AI". This course is designed for people aged 60 and above who want to write memoirs, family histories, or books — many of whom are not tech-savvy.
+
+Your personality:
+- Warm, patient, encouraging — like a kind teacher
+- Clear and simple — avoid jargon, explain any technical terms you use
+- Practical — always give concrete examples or actionable next steps
+- Honest but kind when giving writing feedback
+- Use simple, clear English appropriate for a 60+ audience
+- Enthusiastic about storytelling and life experiences
+
+This course covers 8 modules:
+1. What AI Actually Is — demystifying AI as a team of apprentices
+2. Speak Your Book Into Existence — Whisper, ChatGPT Voice Mode, Otter.ai, Word Dictate, NotebookLM
+3. ChatGPT — Your Writing Companion (brainstorm, outline, memoir interviews)
+4. Claude — The Thoughtful Editor (long manuscript editing, tone preservation)
+5. Perplexity AI — Your Fact Checker (research with citations, Academic mode)
+6. Napkin AI — Turn Ideas into Visuals (timelines, family trees, diagrams)
+7. AI Images — Book Covers & Illustrations (ChatGPT image gen, Canva AI)
+8. Build Your Complete Author Workflow
+
+The course follows John Kamau, a 67-year-old retired teacher from Nairobi who wants to write a memoir.
+
+When giving writing feedback:
+1. Start with something you genuinely liked
+2. Give 1-2 specific, actionable improvements
+3. End with encouragement
+
+When suggesting AI prompts, format them clearly starting with "📋 Prompt to copy:" followed by the actual prompt in quotes.
+
+Keep responses warm, readable, and conversational. Use short paragraphs. This is a conversation, not an essay.`;
+
+let history = [];
+let loading = false;
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 130) + 'px';
+}
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+function sendQuick(text) {
+  showPage('tutor');
+  setTimeout(() => {
+    document.getElementById('userInput').value = text;
+    sendMessage();
+  }, 100);
+}
+
+function addMsg(role, content) {
+  const msgs = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = `msg ${role === 'user' ? 'user user-msg' : 'tutor-msg'}`;
+  const av = document.createElement('div');
+  av.className = 'm-av';
+  av.textContent = role === 'user' ? '👤' : '📚';
+  const bub = document.createElement('div');
+  bub.className = 'm-bubble';
+  bub.innerHTML = fmt(content);
+  div.appendChild(av);
+  div.appendChild(bub);
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function fmt(t) {
+  return t
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g,'<em>$1</em>')
+    .replace(/📋 Prompt to copy:\s*"([^"]+)"/g,'<div class="prompt-chip"><div class="lbl">📋 Prompt to copy</div><div class="txt">"$1"</div></div>')
+    .split('\n\n').map(p=>p.trim()?`<p>${p.replace(/\n/g,'<br>')}</p>`:'').join('');
+}
+
+function showTyping() {
+  const msgs = document.getElementById('messages');
+  const d = document.createElement('div');
+  d.className = 'msg tutor-msg'; d.id = 'typing';
+  d.innerHTML = '<div class="m-av">📚</div><div class="m-bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
+  msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight;
+}
+function removeTyping() { const e = document.getElementById('typing'); if(e) e.remove(); }
+
+async function sendMessage() {
+  const inp = document.getElementById('userInput');
+  const text = inp.value.trim();
+  if (!text || loading) return;
+  inp.value = ''; inp.style.height = 'auto';
+  loading = true; document.getElementById('sendBtn').disabled = true;
+  addMsg('user', text);
+  history.push({role:'user', content:text});
+  showTyping();
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system: SYSTEM,
+        tools:[{type:'web_search_20250305',name:'web_search'}],
+        messages: history
+      })
+    });
+    const data = await res.json();
+    let reply = '';
+    if (data.content) {
+      for (const b of data.content) { if (b.type === 'text') reply += b.text; }
+    }
+    if (!reply && data.error) reply = "I am sorry, I had a little trouble connecting. Please try again in a moment — I am here to help!";
+    removeTyping();
+    if (reply) { addMsg('tutor', reply); history.push({role:'assistant', content:reply}); }
+  } catch(e) {
+    removeTyping();
+    addMsg('tutor', "I am sorry, there was a connection problem. Please check your internet and try again. I am still here for you! 💚");
+    history.pop();
+  }
+  loading = false;
+  document.getElementById('sendBtn').disabled = false;
+  document.getElementById('userInput').focus();
+}
+</script>
+</body>
+</html>
